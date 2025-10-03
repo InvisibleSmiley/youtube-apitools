@@ -10,12 +10,9 @@ use InvisibleSmiley\YouTubeApiTools\ValueObject\Video;
 use Ramsey\Collection\Collection;
 use RuntimeException;
 
-/**
- * @todo write tests
- */
 final readonly class YouTubeApiService implements YouTubeApiServiceInterface
 {
-    public function __construct(private YouTubeApiClient $apiClient)
+    public function __construct(private YouTubeApiClientInterface $apiClient)
     {
     }
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace InvisibleSmiley\YouTubeApiTools;
 
-use Google\Service\Exception as GoogleServiceException;
 use Google_Service_YouTube as GoogleYouTubeService;
 use Google_Service_YouTube_Playlist as Playlist;
 use Google_Service_YouTube_PlaylistItem as PlaylistItem;
@@ -13,12 +12,7 @@ use Google_Service_YouTube_PlaylistSnippet as PlaylistSnippet;
 use Google_Service_YouTube_PlaylistStatus as PlaylistStatus;
 use Google_Service_YouTube_ResourceId as ResourceId;
 
-/**
- * @todo write tests
- *
- * @phpstan-type VIDEO_SPEC array{id: string, channel: array{id: string, title: string}}
- */
-final class YouTubeApiClient
+final class YouTubeApiClient implements YouTubeApiClientInterface
 {
     private const int CHUNK_SIZE = 50;
 
@@ -42,10 +36,6 @@ final class YouTubeApiClient
         return $playlist;
     }
 
-
-    /**
-     * @throws GoogleServiceException
-     */
     public function addPlaylist(Playlist $playlist): Playlist
     {
         return $this->googleYouTubeService->playlists->insert('snippet,status', $playlist);
@@ -71,18 +61,11 @@ final class YouTubeApiClient
         return $playlistItem;
     }
 
-    /**
-     * @throws GoogleServiceException
-     */
     public function addPlaylistItem(PlaylistItem $playlistItem): PlaylistItem
     {
         return $this->googleYouTubeService->playlistItems->insert('snippet,contentDetails', $playlistItem);
     }
 
-    /**
-     * @return array<Playlist>
-     * @throws GoogleServiceException
-     */
     public function findPlaylistsForChannel(string $channelId): array
     {
         $result = [];
@@ -105,9 +88,6 @@ final class YouTubeApiClient
         return $result;
     }
 
-    /**
-     * @throws GoogleServiceException
-     */
     public function findPlaylistIdForName(string $channelId, string $playlistName): ?string
     {
         foreach ($this->findPlaylistsForChannel($channelId) as $item) {
@@ -119,10 +99,6 @@ final class YouTubeApiClient
         return null;
     }
 
-    /**
-     * @return array<PlaylistItem>
-     * @throws GoogleServiceException
-     */
     public function listItemsForPlaylist(string $playlistId): array
     {
         $result = [];

@@ -25,6 +25,11 @@
       "InvisibleSmiley\\YouTubeApiTools\\": "src"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "InvisibleSmiley\\YouTubeApiTools\\Test\\": "test"
+    }
+  },
   "config": {
     "allow-plugins": {
       "ergebnis/composer-normalize": true,

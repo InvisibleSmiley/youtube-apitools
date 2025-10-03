@@ -2,6 +2,9 @@
 
 namespace InvisibleSmiley\YouTubeApiTools\ValueObject;
 
+/**
+ * @todo change $publishedAt type to DateTimeInterface
+ */
 final readonly class Video implements ValueObjectInterface
 {
     private function __construct(

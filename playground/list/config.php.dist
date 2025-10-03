@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    '<some_playlist_name>',
+    [
+        '<some_channel_name>'        => '<some_custom_channel_grouping_name>',
+        '<some_other_channel_name>'  => '<some_custom_channel_grouping_name>',
+        '<yet_another_channel_name>' => '<another_custom_channel_grouping_name>',
+    ]
+];

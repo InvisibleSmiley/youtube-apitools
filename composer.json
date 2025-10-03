@@ -1,0 +1,43 @@
+{
+  "name": "invisiblesmiley/youtube-apitools",
+  "description": "YouTube API tools",
+  "autoload" : {
+    "psr-4" : {
+      "InvisibleSmiley\\YouTubeApiTools\\" : "src"
+    }
+  },
+  "require" : {
+    "php": "^8.4",
+    "google/apiclient": "^2.0",
+    "ramsey/collection": "^2.1",
+    "symfony/dotenv": "^7.3"
+  },
+  "require-dev": {
+    "brianium/paratest": "^7.14",
+    "ergebnis/composer-normalize": "^2.48",
+    "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan": "^2.1",
+    "phpstan/phpstan-deprecation-rules": "^2.0",
+    "phpstan/phpstan-phpunit": "^2.0",
+    "phpstan/phpstan-strict-rules": "^2.0",
+    "phpunit/phpunit": "^12.4",
+    "roave/security-advisories": "dev-latest",
+    "squizlabs/php_codesniffer": "^4.0"
+  },
+  "scripts": {
+    "phpcs": "phpcs --standard=PSR12 src",
+    "phpstan": "phpstan analyze --no-progress",
+    "test": "paratest",
+    "serve-playground": [
+      "Composer\\Config::disableProcessTimeout",
+      "@php -S localhost:8000 -t playground"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true,
+      "phpstan/extension-installer": true
+    },
+    "sort-packages": true
+  }
+}

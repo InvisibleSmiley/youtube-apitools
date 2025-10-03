@@ -1,0 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    ['<new_playlist_name>', '<new_playlist_description>'],
+    ['<video_id>', '<video_description>']
+];

@@ -10,7 +10,7 @@ final readonly class Channel implements ValueObjectInterface
 
     public static function create(string $id, string $title): self
     {
-        return new self($id ,$title);
+        return new self($id, $title);
     }
 
     public function getId(): string

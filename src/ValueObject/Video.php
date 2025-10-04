@@ -2,22 +2,26 @@
 
 namespace InvisibleSmiley\YouTubeApiTools\ValueObject;
 
-/**
- * @todo change $publishedAt type to DateTimeInterface
- */
+use DateMalformedStringException;
+use DateTimeImmutable;
+use DateTimeInterface;
+
 final readonly class Video implements ValueObjectInterface
 {
     private function __construct(
         private string $id,
         private string $title,
-        private string $publishedAt,
+        private DateTimeInterface $publishedAt,
         private Channel $channel
     ) {
     }
 
+    /**
+     * @throws DateMalformedStringException
+     */
     public static function create(string $id, string $title, string $publishedAt, Channel $channel): self
     {
-        return new self($id, $title, $publishedAt, $channel);
+        return new self($id, $title, new DateTimeImmutable($publishedAt), $channel);
     }
 
     public function getId(): string
@@ -30,7 +34,7 @@ final readonly class Video implements ValueObjectInterface
         return $this->title;
     }
 
-    public function getPublishedAt(): string
+    public function getPublishedAt(): DateTimeInterface
     {
         return $this->publishedAt;
     }

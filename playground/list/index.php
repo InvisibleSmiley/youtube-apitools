@@ -42,12 +42,11 @@ if ($playlistId !== null) {
             $videoTitle = '<span style="color: red;">' . $videoTitle . '</span>';
         }
 
-        /** @noinspection PhpUnhandledExceptionInspection */
         print sprintf(
             '<li>%s (channel: %s, published %s)</li>',
             $videoTitle,
             $channelTitle,
-            new DateTime($video->getPublishedAt())->format('Y-m-d')
+            $video->getPublishedAt()->format('Y-m-d')
         );
 
         $lastTarget = $target;

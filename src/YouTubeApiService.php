@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace InvisibleSmiley\YouTubeApiTools;
 
+use DateMalformedStringException;
 use Google\Service\Exception as GoogleServiceException;
 use InvisibleSmiley\YouTubeApiTools\ValueObject\Channel;
 use InvisibleSmiley\YouTubeApiTools\ValueObject\Video;
@@ -49,14 +50,17 @@ final readonly class YouTubeApiService implements YouTubeApiServiceInterface
             $channelid = $snippet->getVideoOwnerChannelId();
             $channelTitle = $snippet->getVideoOwnerChannelTitle();
 
-            $result->add(
-                Video::create(
+            try {
+                $video = Video::create(
                     $videoId,
                     $videoTitle,
                     $videoPublishedAt,
                     Channel::create($channelid, $channelTitle)
-                )
-            );
+                );
+            } catch (DateMalformedStringException $e) {
+                throw new RuntimeException('Unable to create video', previous: $e);
+            }
+            $result->add($video);
         }
 
         return $result;

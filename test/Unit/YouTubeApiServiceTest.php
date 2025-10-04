@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace InvisibleSmiley\YouTubeApiTools\Test\Unit;
 
+use DateMalformedStringException;
 use Google\Service\Exception as GoogleServiceException;
 use Google\Service\YouTube\PlaylistItem;
 use Google\Service\YouTube\PlaylistItemContentDetails;
@@ -77,6 +78,9 @@ final class YouTubeApiServiceTest extends TestCase
         $this->service->findPlaylistIdForName(self::TEST_CHANNEL_ID, self::TEST_PLAYLIST_NAME);
     }
 
+    /**
+     * @throws DateMalformedStringException
+     */
     public function testListVideosForPlaylistReturnsVideos(): void
     {
         $playlistItem1 = $this->createPlaylistItemMock(

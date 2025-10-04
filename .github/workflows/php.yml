@@ -41,3 +41,6 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+
+    - name: Check coverage
+      run: composer run-script check-coverage

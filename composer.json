@@ -18,6 +18,7 @@
     "phpstan/phpstan-strict-rules": "^2.0",
     "phpunit/phpunit": "^12.4",
     "roave/security-advisories": "dev-latest",
+    "rregeer/phpunit-coverage-check": "^0.3.1",
     "squizlabs/php_codesniffer": "^4.0"
   },
   "autoload": {
@@ -38,6 +39,16 @@
     "sort-packages": true
   },
   "scripts": {
+    "check": [
+      "@phpcs",
+      "@phpstan",
+      "@check-coverage"
+    ],
+    "check-coverage": [
+      "@putenv XDEBUG_MODE=coverage",
+      "phpunit --coverage-clover data/phpunit/clover.xml",
+      "coverage-check data/phpunit/clover.xml 15"
+    ],
     "phpcs": "phpcs --standard=PSR12 src",
     "phpstan": "phpstan analyze --no-progress",
     "serve-playground": [

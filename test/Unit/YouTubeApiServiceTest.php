@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMultipleClassDeclarationsInspection */
+
 declare(strict_types=1);
 
 namespace InvisibleSmiley\YouTubeApiTools\Test\Unit;
@@ -177,7 +179,7 @@ final class YouTubeApiServiceTest extends TestCase
         self::assertCount(0, $result);
     }
 
-    public function testListVideosForPlaylistThrowsException(): void
+    public function testListVideosForPlaylistApiErrorThrowsException(): void
     {
         $googleException = new GoogleServiceException('API error');
 
@@ -189,6 +191,29 @@ final class YouTubeApiServiceTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Unable to determine playlist items');
+
+        $this->service->listVideosForPlaylist(self::TEST_PLAYLIST_ID);
+    }
+
+    public function testListVideosForPlaylistInvalidDateThrowsException(): void
+    {
+        $playlistItem = $this->createPlaylistItemMock(
+            'Video_ID_1',
+            'Video Title 1',
+            'dawn',
+            'Channel_ID_1',
+            'Channel Title 1',
+            'public'
+        );
+
+        $this->apiClient
+            ->expects($this->once())
+            ->method('listItemsForPlaylist')
+            ->with(self::TEST_PLAYLIST_ID)
+            ->willReturn([$playlistItem]);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Unable to create video');
 
         $this->service->listVideosForPlaylist(self::TEST_PLAYLIST_ID);
     }

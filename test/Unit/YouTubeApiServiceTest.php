@@ -16,11 +16,14 @@ use InvisibleSmiley\YouTubeApiTools\YouTubeApiClientInterface;
 use InvisibleSmiley\YouTubeApiTools\YouTubeApiService;
 use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 #[CoversClass(YouTubeApiService::class)]
+#[UsesClass(Channel::class)]
+#[UsesClass(Video::class)]
 final class YouTubeApiServiceTest extends TestCase
 {
     private const string TEST_CHANNEL_ID = 'test_channel_id';

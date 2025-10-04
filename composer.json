@@ -9,6 +9,7 @@
     "symfony/dotenv": "^7.3"
   },
   "require-dev": {
+    "brainmaestro/composer-git-hooks": "^3.0",
     "brianium/paratest": "^7.14",
     "ergebnis/composer-normalize": "^2.48",
     "phpstan/extension-installer": "^1.4",
@@ -56,5 +57,16 @@
       "@php -S localhost:8000 -t playground"
     ],
     "test": "paratest"
+  },
+  "extra": {
+    "hooks": {
+      "pre-commit": [
+        "composer run phpcs",
+        "composer run phpstan"
+      ],
+      "pre-push": [
+        "composer run check-coverage"
+      ]
+    }
   }
 }
